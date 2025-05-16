@@ -69,23 +69,52 @@ nav {
     backdrop-filter: blur(5px);
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+/* Main Menu */
+        .main-menu {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
 
-.logo-img {
-    height: 50px;
-    width: auto;
-    border-radius: 50%;
-    transition: transform 0.4s ease, filter 0.4s ease;
-}
+        .logo-img {
+            height: 70px;
+            width: auto;
+            border-radius: 12px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
 
-.logo-img:hover {
-    transform: scale(1.2) rotate(5deg);
-    filter: brightness(1.2);
-}
+        .logo-img:hover {
+            transform: scale(1.05) rotate(2deg);
+            filter: brightness(1.15);
+        }
+
+        .logo-text {
+            margin-left: 12px;
+        }
+
+        .logo {
+            font-weight: bold;
+            color: #137b4d;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .slogan {
+            font-size: 14px;
+            font-style: italic;
+            color: #137b4d;
+            opacity: 0.85;
+        }
 
 nav ul {
     display: flex;
@@ -620,6 +649,61 @@ footer.visible {
 }
 
 @media (max-width: 768px) {
+     .top-bar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 20px;
+            }
+
+            .top-bar .right-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .main-menu {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .main-menu nav {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .main-menu nav ul {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+
+            .main-menu nav ul li>a {
+                padding: 8px 15px;
+            }
+
+            .main-menu nav ul li ul {
+                position: static;
+                transform: none;
+                width: 100%;
+                text-align: center;
+            }
+
+            .logo-img {
+                height: 50px;
+            }
+
+            .typing-box {
+                height: 200px;
+            }
+
+            .textContent {
+                font-size: 1.1rem;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
     nav {
         flex-direction: column;
         padding: 15px 20px;

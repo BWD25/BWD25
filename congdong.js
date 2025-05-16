@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Ensure currentUserEmail is set correctly on page load
+    const currentUserEmail = localStorage.getItem('currentUserEmail');
+    if (!currentUserEmail) {
+        console.warn('No current user email found in localStorage.');
+    }
+
     loadPosts();
     checkMembershipStatus();
 
@@ -80,7 +86,9 @@ function handlePostSubmit(e) {
         author: currentUser.name,
         authorEmail: currentUser.email,
         timestamp: new Date().toISOString(),
-        comments: []
+        comments: [],
+        likes: 0, // Thêm trường likes mặc định
+        likedBy: [] // Thêm mảng để theo dõi người đã thích
     };
 
     if (imageFile) {
@@ -116,8 +124,23 @@ function loadPosts() {
     }
 
     let posts = JSON.parse(localStorage.getItem('posts') || '[]');
-    // Filter out invalid posts
-    posts = posts.filter(post => post && post.author && typeof post.author === 'string');
+    // Ensure all posts have authorEmail, likes, and likedBy
+    posts = posts.map(post => {
+        if (!post || !post.author || typeof post.author !== 'string') {
+            return null;
+        }
+        if (!post.authorEmail) {
+            const members = JSON.parse(localStorage.getItem('members') || '[]');
+            const matchedMember = members.find(member => member.name === post.author);
+            post.authorEmail = matchedMember ? matchedMember.email : 'unknown@example.com';
+        }
+        if (!post.hasOwnProperty('likes')) post.likes = 0;
+        if (!post.hasOwnProperty('likedBy')) post.likedBy = [];
+        return post;
+    }).filter(post => post !== null);
+
+    localStorage.setItem('posts', JSON.stringify(posts)); // Save updated posts
+
     postsContainer.innerHTML = '<h2>Bài Viết Cộng Đồng</h2>';
 
     if (posts.length === 0) {
@@ -129,19 +152,34 @@ function loadPosts() {
         return;
     }
 
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+        console.warn('No current user found when loading posts.');
+        return;
+    }
+
     posts.forEach(post => {
-        const postElement = createPostElement(post);
+        const postElement = createPostElement(post, currentUser);
         postsContainer.appendChild(postElement);
     });
 }
 
-function createPostElement(post) {
+function createPostElement(post, currentUser) {
     const article = document.createElement('article');
     article.className = 'post';
 
-    // Use a default value if post.author is undefined or not a string
     const author = typeof post.author === 'string' && post.author.trim() ? post.author : 'Người dùng ẩn danh';
     const firstLetter = author.charAt(0).toUpperCase();
+
+    // Hiển thị nút "Gỡ Bài" cho tất cả bài đăng
+    const deleteButton = `<button class="delete-post-btn" data-post-id="${post.id}">Gỡ Bài</button>`;
+    // Thêm nút "Tim" và số lượt thích
+    const isLiked = currentUser && post.likedBy.includes(currentUser.email);
+    const likeButton = `
+        <button class="like-post-btn ${isLiked ? 'liked' : ''}" data-post-id="${post.id}">
+            <span>❤️</span> ${post.likes}
+        </button>
+    `;
 
     article.innerHTML = `
         <div class="post-header">
@@ -152,9 +190,13 @@ function createPostElement(post) {
                     <span class="timestamp">${new Date(post.timestamp).toLocaleString('vi-VN')}</span>
                 </div>
             </div>
+            ${deleteButton}
         </div>
         <p>${post.content}</p>
         ${post.image ? `<img src="${post.image}" alt="Post Image">` : ''}
+        <div class="post-actions">
+            ${likeButton}
+        </div>
         <div class="comments">
             <h4>Bình luận (${post.comments.length})</h4>
             ${post.comments.map(comment => `
@@ -182,7 +224,44 @@ function createPostElement(post) {
         });
     }
 
+    const deleteBtn = article.querySelector('.delete-post-btn');
+    if (deleteBtn) {
+        deleteBtn.addEventListener('click', () => {
+            if (confirm('Bạn có chắc muốn gỡ bài viết này?')) {
+                deletePost(post.id);
+            }
+        });
+    }
+
+    const likeBtn = article.querySelector('.like-post-btn');
+    if (likeBtn && currentUser) {
+        likeBtn.addEventListener('click', () => {
+            handleLike(post.id, currentUser.email);
+        });
+    }
+
     return article;
+}
+
+function handleLike(postId, userEmail) {
+    let posts = JSON.parse(localStorage.getItem('posts') || '[]');
+    const postIndex = posts.findIndex(p => p.id === postId);
+
+    if (postIndex !== -1) {
+        const post = posts[postIndex];
+        const hasLiked = post.likedBy.includes(userEmail);
+
+        if (!hasLiked) {
+            post.likes += 1;
+            post.likedBy.push(userEmail);
+        } else {
+            post.likes -= 1;
+            post.likedBy = post.likedBy.filter(email => email !== userEmail);
+        }
+
+        localStorage.setItem('posts', JSON.stringify(posts));
+        loadPosts();
+    }
 }
 
 function addComment(postId, content) {
@@ -209,6 +288,13 @@ function addComment(postId, content) {
     }
 }
 
+function deletePost(postId) {
+    let posts = JSON.parse(localStorage.getItem('posts') || '[]');
+    posts = posts.filter(p => p.id !== postId);
+    localStorage.setItem('posts', JSON.stringify(posts));
+    loadPosts();
+}
+
 function handleJoinSubmit(e) {
     e.preventDefault();
 
@@ -222,10 +308,7 @@ function handleJoinSubmit(e) {
     }
 
     const existingMembers = JSON.parse(localStorage.getItem('members') || '[]');
-    if (existingMembers.some(member => member.email === email)) {
-        alert('Email này đã được đăng ký!');
-        return;
-    }
+    const memberExists = existingMembers.some(member => member.email === email);
 
     const member = {
         name,
@@ -234,8 +317,11 @@ function handleJoinSubmit(e) {
         timestamp: new Date().toISOString()
     };
 
-    existingMembers.push(member);
-    localStorage.setItem('members', JSON.stringify(existingMembers));
+    if (!memberExists) {
+        existingMembers.push(member);
+        localStorage.setItem('members', JSON.stringify(existingMembers));
+    }
+
     localStorage.setItem('currentUserEmail', email);
 
     alert('Chào mừng bạn đã tham gia cộng đồng! Bây giờ bạn có thể đăng bài.');
