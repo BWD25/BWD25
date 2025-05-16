@@ -1,0 +1,364 @@
+/* Reset mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Font và kiểu chung */
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.7;
+    color: #1b2e20;
+    background: #f8f9fa;
+    overflow-x: hidden;
+}
+
+/* Video nền */
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.7;
+    filter: brightness(0.9);
+}
+
+/* Header */
+header {
+    color: white;
+    text-align: center;
+    padding: 0 20px 40px;
+    position: relative;
+    z-index: 1;
+     width: 100%;
+    max-width: 100%;
+      margin: 0;
+      margin: 0;
+    padding: 0;
+    
+    
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #1b5e20, #4caf50);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    border-radius: 50%;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.2) rotate(5deg);
+    filter: brightness(1.2);
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    background: #ffca28;
+    color: #1b5e20;
+    transform: translateY(-2px);
+}
+
+/* Hero section */
+.hero {
+    padding: 100px 20px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 30%);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.hero.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero h1 {
+    font-size: 3.3rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.hero p {
+    font-size: 1.4rem;
+    max-width: 700px;
+    margin: 0 auto;
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Protected Animals Section */
+#protected-animals {
+    padding: 60px 30px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    margin: 40px auto;
+    max-width: 1200px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+#protected-animals.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#protected-animals h2 {
+    font-size: 3rem;
+    color: #1b5e20;
+    margin-bottom: 35px;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.animal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.animal-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.4s, box-shadow 0.4s;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.animal-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animal-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.animal-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.4s;
+}
+
+.animal-card img:hover {
+    transform: scale(1.05);
+}
+
+.animal-card h3 {
+    font-size: 1.2rem;
+    color: #1b5e20;
+    margin: 10px 0;
+    font-weight: 700;
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+}
+
+.animal-card p {
+    font-size: 0.75rem;
+    color: #1b2e20;
+    line-height: 1.6;
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Nội dung mở rộng với nền xanh lá và cỡ chữ lớn hơn */
+.card-body {
+    background: #4caf50; /* Nền xanh lá */
+    color: white;
+    font-size: 0.8rem; /* Cỡ chữ lớn hơn so với trước (0.7rem), gần với p (0.75rem) */
+    line-height: 1.5;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, #1b5e20, #4caf50);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+    box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+footer.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.social-links a {
+    color: white;
+    margin: 0 20px;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-links a:hover {
+    color: #ffca28;
+    transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .animal-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .hero h1 {
+        font-size: 3rem;
+    }
+    .hero p {
+        font-size: 1.3rem;
+    }
+    .animal-card img {
+        height: 120px;
+    }
+    .animal-card h3 {
+        font-size: 1.1rem;
+    }
+    .animal-card p {
+        font-size: 0.7rem;
+    }
+    .card-body {
+        font-size: 0.75rem; /* Điều chỉnh responsive */
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        padding: 15px 20px;
+    }
+    .logo-img {
+        height: 40px;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        margin-top: 15px;
+    }
+    nav ul li a {
+        font-size: 1rem;
+        padding: 8px 12px;
+    }
+    .hero {
+        padding: 80px 20px;
+    }
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+    .hero p {
+        font-size: 1.2rem;
+    }
+    #protected-animals {
+        padding: 50px 20px;
+        margin: 30px 15px;
+    }
+    .animal-grid {
+        grid-template-columns: 1fr;
+    }
+    .animal-card img {
+        height: 100px;
+    }
+    .animal-card h3 {
+        font-size: 1rem;
+    }
+    .animal-card p {
+        font-size: 0.65rem;
+    }
+    .card-body {
+        font-size: 0.7rem; /* Điều chỉnh responsive */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2.4rem;
+    }
+    .hero p {
+        font-size: 1.1rem;
+    }
+    #protected-animals h2 {
+        font-size: 2.6rem;
+    }
+    .animal-card img {
+        height: 80px;
+    }
+    .animal-card h3 {
+        font-size: 0.9rem;
+    }
+    .animal-card p {
+        font-size: 0.6rem;
+    }
+    .card-body {
+        font-size: 0.65rem; /* Điều chỉnh responsive */
+    }
+    nav {
+        padding: 10px 15px;
+    }
+    .logo-img {
+        height: 35px;
+    }
+    nav ul li a {
+        font-size: 0.95rem;
+        padding: 6px 10px;
+    }
+}

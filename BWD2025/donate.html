@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quyên Góp - Bảo Vệ Động Vật</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="stylesdnt.css">
+    <link rel="stylesheet" href="chung.css">
+</head>
+<body>
+   <video autoplay muted loop class="background-video">
+        <source src="https://cdn.pixabay.com/video/2023/11/12/188861-883827797_large.mp4" type="video/mp4">
+    </video>
+    <header>
+       <div class="top-bar">
+
+    <div class="right-links">
+      <a href="#">Liên lạc</a>
+      <a href="#">Tài liệu</a>
+      <a href="#">Tình nguyện</a>
+      <a href="#">Việc làm</a>
+      <span>🇺🇸 🇻🇳</span>
+    </div>
+    
+  </div>
+
+<div class="main-menu">
+    <img src="asset/image/logoVip.png" alt="logo" class="logo-img">
+   <div class="logo-text">
+    <span class="logo">WLA</span>
+    <p class="slogan">Yêu động vật là yêu bản thân</p>
+</div>
+ <nav>
+   
+       
+      <ul>
+        <li><a href="index.html">ĐỘNG VẬT VIỆT NAM</a>
+          <ul>
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="listanimal.html">Các loài động vật cần giúp</a></li>
+            <li><a href="congdong.html">cộng Đồng</a></li>
+            <li><a href="index.html#blog">Tin tức</a></li>
+            <li><a href="lienhe.html">Đội ngũ</a></li>
+            <li><a href="donate.html">Giúp đỡ</a></li>
+            <li><a href="transaction-history.html">lịch sử quyên góp</a></li>
+          </ul>
+        </li>
+        <li><a href="page2.html">CHÓ MÈO VIỆT NAM</a>
+          <ul>
+            <li><a href="page2.html">Trang chủ</a></li>
+            <li><a href="page2.html#news">Tin tức</a></li>
+            <li><a href="donate.html">Giúp đỡ</a></li>
+            <li><a href="lienhe.html">Đội ngũ</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav></div>
+    </header>
+
+    <main>
+        <section id="donate" class="donate-section">
+            <h2>Quyên Góp Ngay Hôm Nay</h2>
+            <p>Nhập số tiền bạn muốn quyên góp và quét mã QR để chuyển khoản.</p>
+            
+            <!-- Biểu mẫu quyên góp -->
+            <div class="donate-form">
+                <h3>Nhập Số Tiền</h3>
+                <div class="donate-options">
+                    <button class="donate-amount" data-amount="50000">50,000 VND</button>
+                    <button class="donate-amount" data-amount="100000">100,000 VND</button>
+                    <button class="donate-amount" data-amount="200000">200,000 VND</button>
+                    <button class="donate-amount" data-amount="500000">500,000 VND</button>
+                </div>
+                <label for="custom-amount">Hoặc nhập số tiền tùy chỉnh:</label>
+                <input type="number" id="custom-amount" placeholder="VD: 100000" min="10000">
+                
+                <button id="show-qr" class="cta-button">Quyên Góp Ngay</button>
+                
+                <!-- Khu vực hiển thị mã QR -->
+                <div id="qr-code" class="qr-code" style="display: none;">
+                    <img id="qr-image" src="asset/image/tudo.jpg" alt="Mã QR Quyên Góp">
+                    <p>Quét mã QR để chuyển khoản qua ứng dụng ngân hàng.</p>
+                    <button id="confirm-donation" class="cta-button">Xác Nhận Quyên Góp</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Bảo Vệ Động Vật. Mọi quyền được bảo lưu.</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
+
+    <script>
+        // Định nghĩa ánh xạ số tiền với mã QR
+        const qrCodes = {
+            '50000': 'asset/image/50k.jpg',
+            '100000': 'asset/image/100k.jpg',
+            '200000': 'asset/image/200k.jpg',
+            '500000': 'asset/image/500k.jpg',
+            'default': 'asset/image/tudo.jpg'
+        };
+
+        // Xử lý hiển thị mã QR
+        document.getElementById('show-qr').addEventListener('click', () => {
+            const customAmount = document.getElementById('custom-amount').value;
+            const selectedAmount = document.querySelector('.donate-amount.active')?.dataset.amount || customAmount;
+            const amount = selectedAmount || customAmount;
+
+            // Kiểm tra số tiền hợp lệ
+            if (amount && amount < 10000) {
+                alert('Vui lòng nhập số tiền tối thiểu 10,000 VND.');
+                return;
+            }
+
+            // Chọn mã QR dựa trên số tiền
+            const qrImage = document.getElementById('qr-image');
+            qrImage.src = qrCodes[selectedAmount] || qrCodes['default'];
+
+            document.getElementById('qr-code').style.display = 'block';
+        });
+
+        // Xử lý xác nhận quyên góp
+        document.getElementById('confirm-donation').addEventListener('click', () => {
+            const customAmount = document.getElementById('custom-amount').value;
+            const selectedAmount = document.querySelector('.donate-amount.active')?.dataset.amount || customAmount;
+            const amount = selectedAmount || customAmount;
+
+            // Kiểm tra số tiền hợp lệ
+            if (!amount || amount < 10000) {
+                alert('Vui lòng chọn hoặc nhập số tiền tối thiểu 10,000 VND.');
+                return;
+            }
+
+            // Lưu giao dịch vào localStorage
+            const transaction = {
+                date: new Date().toLocaleString('vi-VN'),
+                amount: parseInt(amount).toLocaleString('vi-VN')
+            };
+
+            let transactions = JSON.parse(localStorage.getItem('donations')) || [];
+            transactions.push(transaction);
+            localStorage.setItem('donations', JSON.stringify(transactions));
+
+            // Đặt lại biểu mẫu
+            document.getElementById('custom-amount').value = '';
+            document.querySelectorAll('.donate-amount').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('qr-code').style.display = 'none';
+
+            alert('Cảm ơn bạn đã quyên góp ' + transaction.amount + ' VND!');
+        });
+
+        // Xử lý chọn số tiền
+        document.querySelectorAll('.donate-amount').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.donate-amount').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById('custom-amount').value = '';
+            });
+        });
+    </script>
+</body>
+</html>
