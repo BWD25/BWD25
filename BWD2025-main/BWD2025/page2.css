@@ -681,7 +681,831 @@ footer.visible {
         padding: 8px 15px;
         font-size: 0.9rem;
     }
+}* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.7;
+    color: #1b2e20;
+    background: #f8f9fa;
+    overflow-x: hidden;
+}
+
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.7;
+    filter: brightness(0.9);
+}
+
+/* Lớp phủ chuyển trang */
+.page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #1b5e20;
+    transform: translateX(100%);
+    z-index: 1000;
+    pointer-events: none;
+    transition: transform 0.5s ease;
+}
+
+.page-transition.active {
+    transform: translateX(0);
+}
+
+/* Tiêu đề */
+header {
+    color: white;
+    text-align: center;
+    padding: 0 20px 40px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Thanh điều hướng */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #1b5e20, #4caf50);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    border-radius: 50%;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.2) rotate(5deg);
+    filter: brightness(1.2);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+}
+
+nav ul li a:hover {
+    background: #ffca28;
+    color: #1b5e20;
+    transform: translateY(-2px);
+}
+
+/* Phần tiêu đề chính */
+.hero {
+    padding: 100px 20px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 30%);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.hero.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero h1 {
+    font-size: 3.8rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.hero p {
+    font-size: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto 35px;
+    color: #e8f5e9;
+}
+
+/* Nút kêu gọi hành động */
+.cta-button {
+    display: inline-block;
+    padding: 14px 30px;
+    background: linear-gradient(135deg, #ffca28, #f57c00);
+    color: #1b5e20;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.cta-button.visible {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.cta-button:hover {
+    background: linear-gradient(135deg, #f57c00, #ffca28);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Phần động vật được bảo vệ */
+#protected-animals {
+    padding: 60px 30px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    margin: 40px auto;
+    max-width: 1200px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+#protected-animals.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+#protected-animals h2 {
+    font-size: 2.8rem;
+    color: #1b5e20;
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.animal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+    background: #e5e5e5; /* Background resembling a book */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); /* Inner shadow for book effect */
+}
+
+.animal-card {
+    background: #f5f5f5; /* Paper-like background */
+    padding: 10px;
+    border-radius: 10px 10px 10px 0; /* Slight asymmetry for page curl */
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2), -2px -2px 5px rgba(255, 255, 255, 0.5); /* Shadow for depth */
+    border: 1px solid #ddd; /* Subtle border for paper edge */
+    position: relative;
+    transition: transform 0.4s, box-shadow 0.4s;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.animal-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 30px 30px 0;
+    border-color: transparent #ddd transparent transparent; /* Page curl effect */
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.animal-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animal-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3), -2px -2px 5px rgba(255, 255, 255, 0.5);
+}
+
+.animal-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.4s;
+}
+
+.animal-card img:hover {
+    transform: scale(1.05);
+}
+
+.animal-card h3 {
+    font-size: 1.2rem;
+    color: #1b5e20;
+    margin: 10px 0;
+    font-weight: 700;
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+}
+
+.animal-card p {
+    font-size: 0.75rem;
+    color: #1b2e20;
+    line-height: 1.6;
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+}
+
+.animal-details {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(232, 245, 233, 0.9);
+    border-radius: 6px;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.animal-details.show {
+    display: block;
+    max-height: 600px;
+    opacity: 1;
+}
+
+.learn-more {
+    color: #1b5e20;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: 2px solid #1b5e20;
+    border-radius: 6px;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+}
+
+.learn-more:hover {
+    background: #ffca28;
+    color: #1b5e20;
+    transform: translateY(-2px);
+}
+
+/* Phần thực trạng */
+#current-situation {
+    padding: 60px 30px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    margin: 40px auto;
+    max-width: 1200px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+#current-situation.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+#current-situation h2 {
+    font-size: 2.8rem;
+    color: #1b5e20;
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+#current-situation p {
+    font-size: 1.2rem;
+    max-width: 900px;
+    margin: 0 auto 20px;
+    color: #1b2e20;
+}
+
+.video-wrapper {
+    max-width: 560px;
+    margin: 20px auto;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.video-wrapper.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.video-wrapper iframe {
+    width: 100%;
+    height: 315px;
+    border-radius: 8px;
+}
+
+/* Phần tin tức */
+#news {
+    padding: 60px 30px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    margin: 40px auto;
+    max-width: 1200px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.bao-iframe {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.bao-iframe iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+#news.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+#news h2 {
+    font-size: 2.8rem;
+    color: #1b5e20;
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.news-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.4s, box-shadow 0.4s;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.news-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.news-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.4s;
+}
+
+.news-card img:hover {
+    transform: scale(1.05);
+}
+
+.news-card h3 {
+    font-size: 1.2rem;
+    color: #1b5e20;
+    margin: 10px 0;
+    font-weight: 700;
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+}
+
+.news-card p {
+    font-size: 0.75rem;
+    color: #1b2e20;
+    line-height: 1.6;
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Phần số liệu thống kê */
+#statistics {
+    padding: 60px 30px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    margin: 40px auto;
+    max-width: 1200px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+#statistics.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+#statistics h2 {
+    font-size: 2.8rem;
+    color: #1b5e20;
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.statistics-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.4s, box-shadow 0.4s;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.stat-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.stat-item h3 {
+    font-size: 1.8rem;
+    color: #1b5e20;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.stat-item p {
+    font-size: 1rem;
+    color: #1b2e20;
+    line-height: 1.6;
+}
+
+/* Chân trang */
+footer {
+    background: linear-gradient(135deg, #1b5e20, #4caf50);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+    box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+footer.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.social-links a {
+    color: white;
+    margin: 0 20px;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-links a:hover {
+    color: #ffca28;
+    transform: translateY(-2px);
+}
+
+/* Thiết kế đáp ứng */
+@media (max-width: 1024px) {
+    .animal-grid, .news-grid, .statistics-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero h1 {
+        font-size: 3.3rem;
+    }
+
+    .hero p {
+        font-size: 1.4rem;
+    }
+
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 1.1rem;
+    }
+
+    .animal-card img, .news-card img {
+        height: 120px;
+    }
+
+    .animal-card h3, .news-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .animal-card p, .news-card p {
+        font-size: 0.7rem;
+    }
+
+    .learn-more {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+    }
+
+    .stat-item h3 {
+        font-size: 1.6rem;
+    }
+
+    .stat-item p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        padding: 15px 20px;
+    }
+
+    .logo-img {
+        height: 40px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    nav ul li a {
+        font-size: 1rem;
+        padding: 8px 12px;
+    }
+
+    .hero {
+        padding: 80px 20px;
+    }
+
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero p {
+        font-size: 1.3rem;
+    }
+
+    .animal-grid, .news-grid, .statistics-list {
+        grid-template-columns: 1fr;
+    }
+
+    .animal-card img, .news-card img {
+        height: 100px;
+    }
+
+    .animal-card h3, .news-card h3 {
+        font-size: 1rem;
+    }
+
+    .animal-card p, .news-card p {
+        font-size: 0.65rem;
+    }
+
+    .learn-more {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+
+    .video-wrapper iframe {
+        height: 250px;
+    }
+
+    .stat-item h3 {
+        font-size: 1.4rem;
+    }
+
+    .stat-item p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2.4rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    .cta-button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    #protected-animals h2, #current-situation h2, #news h2, #statistics h2 {
+        font-size: 2.6rem;
+    }
+
+    .animal-card img, .news-card img {
+        height: 80px;
+    }
+
+    .animal-card h3, .news-card h3 {
+        font-size: 0.9rem;
+    }
+
+    .animal-card p, .news-card p {
+        font-size: 0.6rem;
+    }
+
+    .learn-more {
+        font-size: 0.65rem;
+        padding: 2px 5px;
+    }
+
+    .video-wrapper iframe {
+        height: 200px;
+    }
+
+    .stat-item h3 {
+        font-size: 1.2rem;
+    }
+
+    .stat-item p {
+        font-size: 0.8rem;
+    }
+
+    nav {
+        padding: 10px 15px;
+    }
+
+    .logo-img {
+        height: 35px;
+    }
+
+    nav ul li a {
+        font-size: 0.95rem;
+        padding: 6px 10px;
+    }
+}
+
+.prev-btn {
+    background-color: rgba(245, 245, 245, 0.9);
+    color: #1b2e20;
+    padding: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    transition: background-color 0.3s;
+}
+
+.prev-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 3rem;
+    }
+    .hero h1 {
+        font-size: 3.3rem;
+    }
+    h2 {
+        font-size: 2.6rem;
+    }
+    h3 {
+        font-size: 1.1rem;
+    }
+    p {
+        font-size: 0.9rem;
+    }
+    .animal-card p, .news-card p, .team-card p {
+        font-size: 0.7rem;
+    }
+    .cta-button, .learn-more {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.8rem;
+    }
+    .hero h1 {
+        font-size: 3rem;
+    }
+    h2 {
+        font-size: 2.4rem;
+    }
+    h3 {
+        font-size: 1rem;
+    }
+    p {
+        font-size: 0.85rem;
+    }
+    .animal-card p, .news-card p, .team-card p {
+        font-size: 0.65rem;
+    }
+    .cta-button, .learn-more {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.4rem;
+    }
+    .hero h1 {
+        font-size: 2.6rem;
+    }
+    h2 {
+        font-size: 2.2rem;
+    }
+    h3 {
+        font-size: 0.9rem;
+    }
+    p {
+        font-size: 0.8rem;
+    }
+    .animal-card p, .news-card p, .team-card p {
+        font-size: 0.6rem;
+    }
+    .cta-button, .learn-more {
+        font-size: 0.8rem;
+    }
+}
+
+@import url("chung.css");
 .typing-box {
   width: 1050px;  /* Chiều rộng cố định */
   height: 250px; /* Chiều cao cố định nếu muốn */
