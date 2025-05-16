@@ -32,7 +32,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 20px;
+  padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   position: relative;
 }
@@ -78,19 +78,15 @@
 
 /* ====== NAVIGATION MENU ====== */
 .main-menu nav {
-  background: linear-gradient(to right, #1b5e20, #43a047);
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-  padding: 10px 20px;
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  margin-left: auto; /* đẩy nav sang phải */
+       background: linear-gradient(to right, #1f6325, #43a047);
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            padding: 10px;
 }
 
 .main-menu nav ul {
   display: flex;
-  gap: 50px;
+  gap: 30px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -101,14 +97,14 @@
 }
 
 .main-menu nav ul li > a {
-  margin: 0 15px;
-  padding: 12px 8px;
-  text-decoration: none;
-  color: #222;
-  font-weight: bold;
-  display: block;
-  position: relative;
-  transition: all 0.3s ease;
+            text-decoration: none;
+            color: #f6eded;
+            font-weight: bold;
+            padding: 8px 20px;
+            display: inline-block;
+            white-space: nowrap;
+            position: relative;
+            transition: all 0.3s ease;
 }
 
 .main-menu nav ul li > a::after {

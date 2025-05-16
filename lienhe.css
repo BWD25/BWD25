@@ -27,62 +27,21 @@ body {
     filter: brightness(0.9);
 }
 
-/* Lớp phủ chuyển trang */
-.page-transition {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #1b5e20;
-    transform: translateX(100%);
-    z-index: 1000;
-    pointer-events: none;
-    transition: transform 0.5s ease;
-}
 
-.page-transition.active {
-    transform: translateX(0);
-}
 
-.page-transition.reverse {
-    transform: translateX(-100%);
-}
 
-/* Nút quay lại */
-.prev-btn {
-    background-color: rgba(245, 245, 245, 0.9);
-    color: #1b2e20;
-    padding: 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    text-align: center;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60px;
-    height: 100vh;
-    position: fixed;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 100;
-    transition: background-color 0.3s;
-}
-
-.prev-btn:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-}
 
 /* Header */
 header {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
     color: white;
     text-align: center;
     padding: 0 20px 40px;
     position: relative;
     z-index: 1;
+    
 }
 
 /* Navigation */

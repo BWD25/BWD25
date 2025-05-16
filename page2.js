@@ -41,3 +41,49 @@ document.querySelectorAll('.learn-more').forEach(button => {
         }
     });
 });
+function animateCounter(element, start = 0, end, duration = 4000, suffix = '') {
+  const startTime = performance.now();
+
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const currentValue = Math.floor(start + (end - start) * progress);
+    element.textContent = currentValue.toLocaleString() + suffix;
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      element.textContent = end.toLocaleString() + suffix;
+    }
+  }
+
+  requestAnimationFrame(update);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const numberElements = document.querySelectorAll('.stat-number');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const element = entry.target;
+        const rawText = element.getAttribute('data-final').trim();
+        const hasPlus = rawText.endsWith('+');
+        const hasPercent = rawText.endsWith('%');
+
+        let numeric = parseInt(rawText.replace(/[^\d]/g, ''), 10);
+        let suffix = hasPlus ? '+' : (hasPercent ? '%' : '');
+
+        if (!isNaN(numeric)) {
+          element.textContent = '0' + suffix;
+          animateCounter(element, 0, numeric, 2000, suffix);
+          observer.unobserve(element); // Ngăn chạy lại nhiều lần
+        }
+      }
+    });
+  }, {
+    threshold: 0.5 // Chạy khi phần tử hiển thị ít nhất 50%
+  });
+
+  numberElements.forEach(el => observer.observe(el));
+});
