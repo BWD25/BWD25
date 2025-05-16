@@ -1,1047 +1,828 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.7;
-    color: #1b2e20;
-    background: #f8f9fa;
-    overflow-x: hidden;
-}
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.7;
+            color: #1b2e20;
+            background: #f8f9fa;
+            overflow-x: hidden;
+        }
 
-.background-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -1;
-    opacity: 0.7;
-    filter: brightness(0.9);
-}
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.7;
+            filter: brightness(0.9);
+        }
 
-/* Page transition */
-.page-transition {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #1b5e20;
-    transform: translateX(100%);
-    z-index: 1000;
-    pointer-events: none;
-    transition: transform 0.5s ease;
-}
+        /* Page Transition */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1b5e20;
+            transform: translateX(100%);
+            z-index: 1000;
+            pointer-events: none;
+            transition: transform 0.5s ease;
+        }
 
-.page-transition.active {
-    transform: translateX(0);
-}
+        .page-transition.active {
+            transform: translateX(0);
+        }
 
-/* Header */
-header {
-    color: white;
-    text-align: center;
-    padding: 0 20px 40px;
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    
-    
-}
+        /* Header */
+        header {
+            color: white;
+            text-align: center;
+            padding: 0 20px 40px;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
-/* Navigation */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 40px;
-    background: linear-gradient(135deg, #1b5e20, #4caf50);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    backdrop-filter: blur(5px);
-}
+        /* Top Bar */
+        .top-bar {
+            background-color: #137b4d;
+            color: white;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 30px;
+        }
 
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 20px;
- 
-}
+        .top-bar .right-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-.logo-img {
-  height: 70px;
-  width: auto;
-  border-radius: 12px;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
+        .top-bar .right-links a {
+            color: white;
+            text-decoration: none;
+        }
 
-.logo-img:hover {
-  transform: scale(1.05) rotate(2deg);
-  filter: brightness(1.15);
-}
-
-.logo-text h1 {
-  font-size: 20px;
-  margin: 0;
-  font-weight: 700;
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.2;
-}
-
-.logo-text .slogan {
-  margin: 0;
-  font-size: 18px;
-  font-family: 'Roboto', sans-serif;
-  font-style: italic;
-  line-height: 1.3;
-  opacity: 0.85;
-  color: #137b4d;
-}
-
-    /* PHẦN MENU TRÊN */
-.top-bar {
-      background-color: #137b4d;
-      color: white;
-      font-size: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 30px; /* Adjusted padding */
-    }
-
-    .top-bar .left-icons i,
-    .top-bar .right-links a {
-      margin-right: 10px;
-      color: white;
-      text-decoration: none;
-    }
-
-   .top-bar .left-icons i {
-      margin-right: 15px; /* Adjusted margin */
-      transition: all 0.3s ease;
-      cursor: pointer;
-      font-size: 16px; /* Adjusted font size */
-    }d
-
-    .top-bar .left-icons i:hover {
-      transform: scale(1.2);
-      opacity: 0.8;
-    }
-    .top-bar .right-links {
-      display: flex;
-      align-items: center;
-    }
         .top-bar .right-links a:hover {
-      opacity: 0.8;
-    }
-/* ========== Main Menu Container ========== */
-.main-menu {
-  background-color: #f5f5f5; /* Màu nền thanh menu */
-  display: flex; /* Sắp xếp nội dung theo hàng ngang */
-  justify-content: space-between; /* Cách đều các phần */
-  align-items: center; /* Căn giữa theo chiều dọc */
-  padding: 2px 20px; /* Khoảng cách trong */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Bóng nhẹ */
-  position: relative; /* Cho dropdown định vị */
-  
-}
-.main-menu nav {
-  background: linear-gradient(to right, #1f6325, #43a047);
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-  padding: 10px 1px;
-  margin-top: 10px;
-  display: flex;
-  justify-content: center; /* Căn giữa các mục menu */
-  margin-left:100px;
-}
-/* ========== Logo ========== */
-.main-menu .logo {
-  font-weight: bold; /* Đậm */
-  color: #137b4d; /* Màu logo */
-  font-size: 24px; /* Cỡ chữ lớn */
-  text-transform: uppercase; /* Viết hoa */
-  letter-spacing: 1px; /* Giãn chữ */
-  transition: transform 0.3s ease; /* Hiệu ứng khi hover */
-}
-
-.main-menu .logo:hover {
-  transform: scale(1.05); /* Phóng to khi hover */
-}
-
-/* ========== Navigation ========== */
-.main-menu nav ul {
-  display: flex;
-  gap: 50px; /* Khoảng cách giữa các mục */
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  
-}
-
-.main-menu nav ul li {
-  position: relative; /* Định vị cho dropdown */
-}
-
-.main-menu nav ul li > a {
-  margin: 0 15px;
-  padding: 2px 70px;
-  text-decoration: none; /* Bỏ gạch chân */
-  color: #f6eded;
-  font-weight: bold;
-  display: inline-block;
-  white-space: nowrap;
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-.main-menu nav ul li > a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: #137b4d;
-  transition: width 0.3s ease;
-}
-
-.main-menu nav ul li > a:hover {
-  color: #137b4d;
-}
-
-.main-menu nav ul li > a:hover::after {
-  width: 100%; /* Gạch chân khi hover */
-}
-
-/* ========== Dropdown Menu ========== */
-.main-menu nav ul li ul {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 180px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transform: translateY(10px);
-  opacity: 0;
-  visibility: hidden;
-  transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.main-menu nav ul li:hover ul {
-  display: block;
-  transform: translateY(0);
-  opacity: 1;
-  visibility: visible;
-}
-
-.main-menu nav ul li ul li a {
-  padding: 10px 15px;
-  color: #333;
-  white-space: nowrap;
-  transition: all 0.3s ease;
-}
-
-.main-menu nav ul li ul li a:hover {
-  background-color: #137b4d;
-  color: white;
-}
-
-/* ========== Action Buttons ========== */
-.main-menu .actions button {
-  background-color: #13a454;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 25px;
-  margin-left: 15px;
-  cursor: pointer;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(19, 123, 77, 0.2);
-}
-
-.main-menu .actions button:hover {
-  background-color: #0f8344;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(19, 123, 77, 0.3);
-}
-
-.main-menu .actions button:active {
-  transform: translateY(0);
-}
-
-/* ========== Search Icon ========== */
-.main-menu .search {
-  margin-left: 20px;
-  cursor: pointer;
-  font-size: 20px;
-  padding: 8px;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-}
-
-.main-menu .search:hover {
-  background-color: rgba(19, 123, 77, 0.1);
-  transform: scale(1.1);
-}
-
-    /* PHẦN MENU DƯỚI */
-
-
-
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1.1rem;
-    padding: 2px 15px;
-    border-radius: 8px;
-    transition: background 0.3s, color 0.3s, transform 0.3s;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    background: #ffca28;
-    color: #1b5e20;
-    transform: translateY(-2px);
-}
-
-/* Hero section */
-.hero {
-    padding: 100px 20px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 30%);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.hero.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* CTA button */
-.cta-button {
-    display: inline-block;
-    padding: 14px 30px;
-    background: linear-gradient(135deg, #ffca28, #f57c00);
-    color: #1b5e20;
-    text-decoration: none;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 1.2rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
-    opacity: 0;
-    transform: scale(0.95);
-}
-
-.cta-button.visible {
-    opacity: 1;
-    transform: scale(1);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.cta-button:hover {
-    background: linear-gradient(135deg, #f57c00, #ffca28);
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Blog section */
-#blog,
-#community-posts,
-#join-group,
-#wildlife-trade-crisis,
-#mission,
-#community,
-#statistics,
-#call-to-action,
-#featured-animals {
-    padding: 70px 40px;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    margin: 40px auto;
-    max-width: 1200px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-#featured-animals {
-    padding: 60px 30px;
-    background: rgba(255, 255, 255, 0.7);
-}
-
-#blog.visible,
-#community-posts.visible,
-#join-group.visible,
-#wildlife-trade-crisis.visible,
-#mission.visible,
-#community.visible,
-#statistics.visible,
-#call-to-action.visible,
-#featured-animals.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-#blog h2,
-#wildlife-trade-crisis h2,
-#mission h2,
-#call-to-action h2,
-#community h2,
-#statistics h2,
-#community-posts h2,
-#join-group h2 {
-    font-size: 3rem;
-    color: #1b5e20;
-    margin-bottom: 35px;
-    font-weight: 700;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.bao-iframe {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px 0;
-}
-
-.bao-iframe iframe {
-    width: 100%;
-    height: 600px;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
-
-.content-grid,
-.community-grid,
-.animal-grid,
-.statistics-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.animal-card,
-.content-card,
-.community-card,
-.stat-item {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-    transition: transform 0.4s, box-shadow 0.4s;
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-.stat-item {
-    padding: 20px;
-}
-
-.animal-card.visible,
-.content-card.visible,
-.community-card.visible,
-.stat-item.visible {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.animal-card:hover,
-.content-card:hover,
-.community-card:hover,
-.stat-item:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-}
-
-.animal-card img,
-.content-card img,
-.content-card .video-wrapper iframe,
-.community-card img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.4s;
-}
-
-.animal-card img:hover,
-.content-card img:hover,
-.content-card .video-wrapper iframe:hover,
-.community-card img:hover {
-    transform: scale(1.05);
-}
-
-.animal-card h3,
-.content-card h3,
-.community-card h3,
-.stat-item h3 {
-    font-size: 1.2rem;
-    color: #1b5e20;
-    margin: 10px 0;
-    font-weight: 700;
-    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
-}
-
-.stat-item h3 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-}
-
-.animal-card p,
-.content-card p,
-.community-card p,
-.stat-item p {
-    font-size: 0.75rem;
-    color: #1b2e20;
-    line-height: 1.6;
-    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
-}
-
-.stat-item p {
-    font-size: 1rem;
-}
-
-.animal-details {
-    display: none;
-    margin-top: 10px;
-    padding: 10px;
-    background: rgba(232, 245, 233, 0.9);
-    border-radius: 6px;
-    transition: max-height 0.5s ease, opacity 0.5s ease;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-}
-
-.animal-details.show {
-    display: block;
-    max-height: 600px;
-    opacity: 1;
-}
-
-.learn-more {
-    color: #1b5e20;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 0.8rem;
-    display: inline-block;
-    margin-top: 10px;
-    padding: 5px 10px;
-    border: 2px solid #1b5e20;
-    border-radius: 6px;
-    transition: background 0.3s, color 0.3s, transform 0.3s;
-}
-
-.learn-more:hover {
-    background: #ffca28;
-    color: #1b5e20;
-    transform: translateY(-2px);
-}
-
-/* Form styles */
-.post-form,
-.join-group-form {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-    margin: 20px auto;
-    max-width: 600px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.post-form.visible,
-.join-group-form.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.post-form h3,
-.join-group-form h3 {
-    font-size: 1.5rem;
-    color: #1b5e20;
-    margin-bottom: 15px;
-}
-
-.post-form input,
-.post-form textarea,
-.join-group-form input,
-.join-group-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #1b5e20;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-family: 'Roboto', sans-serif;
-}
-
-.post-form textarea,
-.join-group-form textarea {
-    height: 100px;
-    resize: vertical;
-}
-
-.post-form button,
-.join-group-form button {
-    width: 100%;
-}
-
-/* Comments section */
-.comments-section {
-    display: none;
-    margin-top: 10px;
-    padding: 10px;
-    background: rgba(232, 245, 233, 0.9);
-    border-radius: 6px;
-}
-
-.comments-section h4 {
-    font-size: 1.2rem;
-    color: #1b5e20;
-    margin-bottom: 10px;
-}
-
-.comment {
-    padding: 10px;
-    border-bottom: 1px solid #e8f5e9;
-}
-
-.comment p {
-    font-size: 0.9rem;
-    color: #1b2e20;
-}
-
-.comment small {
-    font-size: 0.7rem;
-    color: #4caf50;
-}
-
-.comment-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #1b5e20;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    height: 60px;
-}
-
-.comment-form button {
-    padding: 8px 15px;
-    font-size: 0.9rem;
-}
-
-/* Footer */
-footer {
-    background: linear-gradient(135deg, #1b5e20, #4caf50);
-    color: white;
-    text-align: center;
-    padding: 50px 20px;
-    box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.3);
-    position: relative;
-    z-index: 1;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-footer.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.social-links a {
-    color: white;
-    margin: 0 20px;
-    text-decoration: none;
-    font-size: 1.3rem;
-    font-weight: 500;
-    transition: color 0.3s, transform 0.3s;
-}
-
-.social-links a:hover {
-    color: #ffca28;
-    transform: translateY(-2px);
-}
-
-/* Next button */
-.next-btn {
-    background-color: whitesmoke;
-    color: black;
-    padding: 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    text-align: center;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60px;
-    height: 100vh;
-    position: fixed;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.next-btn:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-}
-
-.content {
-    position: relative;
-    z-index: 1;
-}
-
-/* Video link and thumbnail */
-.video-link {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #ff0000;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.video-link:hover {
-    background-color: #cc0000;
-}
-
-.video-thumbnail {
-    width: 640px;
-    height: 360px;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: opacity 0.3s;
-}
-
-.video-thumbnail:hover {
-    opacity: 0.8;
-}
-
-/* Responsive design */
-@media (max-width: 1024px) {
-    nav {
-        flex-direction: column;
-        padding: 15px 20px;
-        height: 100%; /* hoặc bất kỳ giá trị nào bạn muốn */
-        padding: 0 20px;
-        display: flex;
-        align-items: center;
-        max-width: 1200px;
-        margin: 0 auto;
-        width: 100vw; /* Chiếm toàn bộ chiều ngang trình duyệt */
-        margin: 0;
-        padding: 0 40px; /* Tuỳ chỉnh padding nếu muốn lùi chữ vào trong */
-        box-sizing: border-box;
-    }
-    .logo-img {
-        height: 40px;
-    }
-    nav ul {
-        flex-direction: column;
-        gap: 15px;
-        width: 100%;
-        margin-top: 15px;
-    }
-    nav ul li a {
-        font-size: 1rem;
-        padding: 8px 12px;
-    }
-    .animal-grid,
-    .community-grid,
-    .statistics-list,
-    .content-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .hero h1 {
-        font-size: 3.3rem;
-    }
-    .hero p {
-        font-size: 1.4rem;
-    }
-    h1 {
-        font-size: 3rem;
-    }
-    h2 {
-        font-size: 2.6rem;
-    }
-    h3 {
-        font-size: 1.1rem;
-    }
-    p {
-        font-size: 0.9rem;
-    }
-    .animal-card p,
-    .content-card p,
-    .community-card p {
-        font-size: 0.7rem;
-    }
-    .cta-button {
-        padding: 12px 25px;
-        font-size: 1.1rem;
-    }
-    .learn-more {
-        font-size: 0.75rem;
-        padding: 4px 8px;
-    }
-    .animal-card img,
-    .content-card img,
-    .content-card .video-wrapper iframe,
-    .community-card img {
-        height: 120px;
-    }
-    .stat-item h3 {
-        font-size: 1.6rem;
-    }
-    .stat-item p {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero {
-        padding: 100px 20px;
-    }
-    .hero h1 {
-        font-size: 3rem;
-    }
-    .hero p {
-        font-size: 1.3rem;
-    }
-    h1 {
-        font-size: 2.8rem;
-    }
-    h2 {
-        font-size: 2.4rem;
-    }
-    h3 {
-        font-size: 1rem;
-    }
-    p {
-        font-size: 0.85rem;
-    }
-    .animal-card p,
-    .content-card p,
-    .community-card p {
-        font-size: 0.65rem;
-    }
-    .cta-button {
-        padding: 10px 20px;
-        font-size: 1rem;
-    }
-    .learn-more {
-        font-size: 0.7rem;
-        padding: 3px 6px;
-    }
-    #blog,
-    #wildlife-trade-crisis,
-    #mission,
-    #community,
-    #statistics,
-    #call-to-action,
-    #community-posts,
-    #join-group {
-        padding: 70px 25px;
-        margin: 50px 15px;
-    }
-    #featured-animals {
-        padding: 50px 20px;
-        margin: 30px 15px;
-    }
-    .animal-grid,
-    .community-grid,
-    .statistics-list,
-    .content-grid {
-        grid-template-columns: 1fr;
-    }
-    .animal-card img,
-    .content-card img,
-    .content-card .video-wrapper iframe,
-    .community-card img {
-        height: 100px;
-    }
-    .vnexpress-iframe iframe {
-        height: 450px;
-        width: 500px;
-    }
-    .stat-item h3 {
-        font-size: 1.4rem;
-    }
-    .stat-item p {
-        font-size: 0.85rem;
-    }
-    nav {
-        padding: 50px 15px;
-    }
-    .logo-img {
-        height: 35px;
-    }
-    nav ul li a {
-        font-size: 0.95rem;
-        padding: 6px 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero h1 {
-        font-size: 2.6rem;
-    }
-    .hero p {
-        font-size: 1.2rem;
-    }
-    h1 {
-        font-size: 2.4rem;
-    }
-    h2 {
-        font-size: 2.2rem;
-    }
-    h3 {
-        font-size: 0.9rem;
-    }
-    p {
-        font-size: 0.8rem;
-    }
-    .animal-card p,
-    .content-card p,
-    .community-card p {
-        font-size: 0.6rem;
-    }
-    .cta-button {
-        padding: 8px 15px;
-        font-size: 0.9rem;
-    }
-    .learn-more {
-        font-size: 0.65rem;
-        padding: 2px 5px;
-    }
-    #blog h2,
-    #wildlife-trade-crisis h2,
-    #mission h2,
-    #community h2,
-    #statistics h2,
-    #call-to-action h2,
-    #community-posts h2,
-    #join-group h2 {
-        font-size: 2.6rem;
-    }
-    .animal-card img,
-    .content-card img,
-    .content-card .video-wrapper iframe,
-    .community-card img {
-        height: 80px;
-    }
-    .bao-iframe iframe {
-        width: 100%;
-        height: 800px;
-    }
-    .stat-item h3 {
-        font-size: 1.2rem;
-    }
-    .stat-item p {
-        font-size: 0.8rem;
-    }
-
-
-}
-.typing-box {
-  width: 1050px;  /* Chiều rộng cố định */
-  height: 250px; /* Chiều cao cố định nếu muốn */
-  margin: 20px auto;
-  padding: 20px;
-  border: 2px solid #42C300; /* Viền màu xanh */
-  border-radius: 15px;        /* Bo góc mềm mại */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Đổ bóng */
-  background-color: #f8f9fa; /* Nền trắng (hoặc bạn có thể dùng gradient) */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.7); /* nền trắng trong suốt 70% */
-}
-
-.typing-box:hover {
-  /* Phóng nhẹ khi hover */
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-}
-#location {
-    padding: 70px 40px;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    margin: 40px auto;
-    max-width: 1200px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-#location.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.map-container iframe {
-    width: 100%;
-    height: 450px;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
- 
+            opacity: 0.8;
+        }
+
+        /* Main Menu */
+        .main-menu {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .logo-img {
+            height: 70px;
+            width: auto;
+            border-radius: 12px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05) rotate(2deg);
+            filter: brightness(1.15);
+        }
+
+        .logo-text {
+            margin-left: 12px;
+        }
+
+        .logo {
+            font-weight: bold;
+            color: #137b4d;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .slogan {
+            font-size: 14px;
+            font-style: italic;
+            color: #137b4d;
+            opacity: 0.85;
+        }
+
+        marquee {
+            flex: 1;
+            margin: 0 20px;
+        }
+
+        /* Navigation */
+        .main-menu nav {
+            background: linear-gradient(to right, #1f6325, #43a047);
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+        }
+
+        .main-menu nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .main-menu nav ul li {
+            position: relative;
+        }
+
+        .main-menu nav ul li>a {
+            text-decoration: none;
+            color: #f6eded;
+            font-weight: bold;
+            padding: 8px 20px;
+            display: inline-block;
+            white-space: nowrap;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .main-menu nav ul li>a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #137b4d;
+            transition: width 0.3s ease;
+        }
+
+        .main-menu nav ul li>a:hover {
+            color: #137b4d;
+        }
+
+        .main-menu nav ul li>a:hover::after {
+            width: 100%;
+        }
+
+        .main-menu nav ul li ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 180px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .main-menu nav ul li:hover ul {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .main-menu nav ul li ul li a {
+            padding: 10px 15px;
+            color: #333;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .main-menu nav ul li ul li a:hover {
+            background-color: #137b4d;
+            color: white;
+        }
+
+        /* Typing Box */
+        .typing-box {
+            width: 100%;
+            max-width: 1050px;
+            height: 250px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid #42C300;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .typing-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .typing-box:hover {
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Text Content */
+        .textContent {
+            font-size: 1.2rem;
+            color: #1b2e20;
+            margin: 20px 0;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #ffca28, #f57c00);
+            color: #1b2e20;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #f57c00, #ffca28);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Next Button */
+        .next-btn {
+            background-color: whitesmoke;
+            color: black;
+            padding: 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 100vh;
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .next-btn:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Mục Blog */
+        #blog,
+        #community-posts,
+        #join-group,
+        #wildlife-trade-crisis,
+        #mission,
+        #community,
+        #statistics,
+        #call-to-action,
+        #featured-animals {
+            padding: 70px 40px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            margin: 40px auto;
+            max-width: 1200px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        #featured-animals {
+            padding: 60px 30px;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        #blog.visible,
+        #community-posts.visible,
+        #join-group.visible,
+        #wildlife-trade-crisis.visible,
+        #mission.visible,
+        #community.visible,
+        #statistics.visible,
+        #call-to-action.visible,
+        #featured-animals.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #blog h2,
+        #wildlife-trade-crisis h2,
+        #mission h2,
+        #call-to-action h2,
+        #community h2,
+        #statistics h2,
+        #community-posts h2,
+        #join-group h2 {
+            font-size: 3rem;
+            color: #1b5e20;
+            margin-bottom: 35px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .bao-iframe {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .bao-iframe iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .video-link:hover {
+            background-color: #cc0000;
+        }
+
+        /* Phần Vị trí */
+        #location {
+            padding: 70px 40px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            margin: 40px auto;
+            max-width: 1200px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        #location.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 450px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Mục Động vật nổi bật */
+        .content-grid,
+        .community-grid,
+        .animal-grid,
+        .statistics-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .animal-card,
+        .content-card,
+        .community-card,
+        .stat-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.4s, box-shadow 0.4s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .animal-card.visible,
+        .content-card.visible,
+        .community-card.visible,
+        .stat-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animal-card:hover,
+        .content-card:hover,
+        .community-card:hover,
+        .stat-item:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .animal-card img,
+        .content-card img,
+        .content-card .video-wrapper iframe,
+        .community-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.4s;
+        }
+
+        .animal-card img:hover,
+        .content-card img:hover,
+        .content-card .video-wrapper iframe:hover,
+        .community-card img:hover {
+            transform: scale(1.05);
+        }
+
+        .animal-card h3,
+        .content-card h3,
+        .community-card h3,
+        .stat-item h3 {
+            font-size: 1.2rem;
+            color: #1b5e20;
+            margin: 10px 0;
+            font-weight: 700;
+            text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .animal-card p,
+        .content-card p,
+        .community-card p,
+        .stat-item p {
+            font-size: 0.75rem;
+            color: #1b2e20;
+            line-height: 1.6;
+            text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-item p {
+            font-size: 1rem;
+        }
+
+        .animal-details {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(232, 245, 233, 0.9);
+            border-radius: 6px;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        .animal-details.show {
+            display: block;
+            max-height: 600px;
+            opacity: 1;
+        }
+
+        .learn-more {
+            color: #1b5e20;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            border: 2px solid #1b5e20;
+            border-radius: 6px;
+            transition: background 0.3s, color 0.3s, transform 0.3s;
+        }
+
+        .learn-more:hover {
+            background: #ffca28;
+            color: #1b5e20;
+            transform: translateY(-2px);
+        }
+
+        /* Community Section */
+        /* (No specific styles added here, assuming it inherits from animal-grid) */
+
+        /* Call to Action Section */
+        /* (No specific styles added here, assuming it inherits from cta-button) */
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1b5e20, #4caf50);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        footer.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 500;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #ffca28;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .top-bar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 20px;
+            }
+
+            .top-bar .right-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .main-menu {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .main-menu nav {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .main-menu nav ul {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+
+            .main-menu nav ul li>a {
+                padding: 8px 15px;
+            }
+
+            .main-menu nav ul li ul {
+                position: static;
+                transform: none;
+                width: 100%;
+                text-align: center;
+            }
+
+            .logo-img {
+                height: 50px;
+            }
+
+            .typing-box {
+                height: 200px;
+            }
+
+            .textContent {
+                font-size: 1.1rem;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+
+            .animal-grid,
+            .community-grid,
+            .statistics-list,
+            .content-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            #blog h2,
+            #wildlife-trade-crisis h2,
+            #mission h2,
+            #call-to-action h2,
+            #community h2,
+            #statistics h2,
+            #community-posts h2,
+            #join-group h2 {
+                font-size: 2.6rem;
+            }
+
+            .animal-card img,
+            .content-card img,
+            .content-card .video-wrapper iframe,
+            .community-card img {
+                height: 120px;
+            }
+
+            .stat-item h3 {
+                font-size: 1.6rem;
+            }
+
+            .stat-item p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                padding: 8px 15px;
+            }
+
+            .top-bar .right-links {
+                gap: 10px;
+            }
+
+            .main-menu {
+                padding: 10px;
+            }
+
+            .logo-img {
+                height: 40px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .slogan {
+                font-size: 12px;
+            }
+
+            marquee {
+                margin: 10px 0;
+            }
+
+            .main-menu nav ul li>a {
+                padding: 6px 10px;
+                font-size: 0.95rem;
+            }
+
+            .typing-box {
+                height: 150px;
+                padding: 10px;
+            }
+
+            .textContent {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+
+            #blog,
+            #wildlife-trade-crisis,
+            #mission,
+            #community,
+            #statistics,
+            #call-to-action,
+            #community-posts,
+            #join-group {
+                padding: 70px 25px;
+                margin: 50px 15px;
+            }
+
+            #featured-animals {
+                padding: 50px 20px;
+                margin: 30px 15px;
+            }
+
+            .animal-grid,
+            .community-grid,
+            .statistics-list,
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .animal-card img,
+            .content-card img,
+            .content-card .video-wrapper iframe,
+            .community-card img {
+                height: 100px;
+            }
+
+            .bao-iframe iframe {
+                height: 450px;
+            }
+
+            .stat-item h3 {
+                font-size: 1.4rem;
+            }
+
+            .stat-item p {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar {
+                padding: 6px 10px;
+            }
+
+            .top-bar .right-links a {
+                font-size: 12px;
+            }
+
+            .logo-img {
+                height: 35px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .slogan {
+                font-size: 10px;
+            }
+
+            .main-menu nav ul li>a {
+                padding: 5px 8px;
+                font-size: 0.9rem;
+            }
+
+            .typing-box {
+                height: 120px;
+                margin: 10px auto;
+            }
+
+            .textContent {
+                font-size: 0.9rem;
+            }
+
+            .cta-button {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            #blog h2,
+            #wildlife-trade-crisis h2,
+            #mission h2,
+            #call-to-action h2,
+            #community h2,
+            #statistics h2,
+            #community-posts h2,
+            #join-group h2 {
+                font-size: 2.2rem;
+            }
+
+            .animal-card img,
+            .content-card img,
+            .content-card .video-wrapper iframe,
+            .community-card img {
+                height: 80px;
+            }
+
+            .bao-iframe iframe {
+                height: 300px;
+            }
+
+            .stat-item h3 {
+                font-size: 1.2rem;
+            }
+
+            .stat-item p {
+                font-size: 0.8rem;
+            }
+        }
