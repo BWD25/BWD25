@@ -25,23 +25,7 @@
         }
 
         /* Page Transition */
-        .page-transition {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #1b5e20;
-            transform: translateX(100%);
-            z-index: 1000;
-            pointer-events: none;
-            transition: transform 0.5s ease;
-        }
-
-        .page-transition.active {
-            transform: translateX(0);
-        }
-
+      
         /* Header */
         header {
             color: white;

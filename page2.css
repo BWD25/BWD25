@@ -481,31 +481,6 @@ footer.visible {
     transform: translateY(-2px);
 }
 
-.prev-btn {
-    background-color: rgba(245, 245, 245, 0.9);
-    color: #1b2e20;
-    padding: 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    text-align: center;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60px;
-    height: 100vh;
-    position: fixed;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-    transition: background-color 0.3s;
-}
-
-.prev-btn:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-}
 
 /* Section thực trạng chó và mèo hoang */
 .crisis-content {
